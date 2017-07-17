@@ -1,0 +1,110 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+         android:layout_width="match_parent"
+         android:layout_height="250dp">
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="posidenpalace.com.placefinder.view.activities.place_finder.PlaceFinder" />
+            </FrameLayout>
+
+
+
+    <fragment
+        android:id="@+id/place_autocomplete_fragmet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/rvPlacesList">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:id="@+id/ivMap"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnFood"
+            android:background="@drawable/food_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnInn"
+            android:background="@drawable/inn_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnBank"
+            android:background="@drawable/bank_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnPark"
+            android:background="@drawable/park_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnLandmark"
+            android:background="@drawable/landmark_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnMuseum"
+            android:background="@drawable/musem_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:id="@+id/btnTheater"
+            android:background="@drawable/theater_icon"
+            android:layout_gravity="center"
+            android:onClick="filter"/>
+
+
+    </LinearLayout>
+</LinearLayout>
