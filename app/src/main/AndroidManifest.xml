@@ -36,12 +36,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
-
         <activity android:name=".view.activities.place_details.PlaceDetails" />
 
         <service
             android:name=".view.activities.place_finder.GeoHelper"
+            android:exported="false" />
+        <service
+            android:name=".view.activities.place_finder.RetroFitHelper"
             android:exported="false"></service>
     </application>
 

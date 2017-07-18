@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import javax.inject.Inject;
 
@@ -23,6 +26,8 @@ public class PlaceDetails extends AppCompatActivity implements PlaceDetailsContr
     RatingBar rate;
     WebView web;
     TextView price;
+    ImageView imageView;
+    TextView noPic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,8 @@ public class PlaceDetails extends AppCompatActivity implements PlaceDetailsContr
         price= (TextView) findViewById(R.id.tvPriceLevel);
         web= (WebView) findViewById(R.id.wvWebSite);
         rate= (RatingBar) findViewById(R.id.rbRatings);
+        imageView = (ImageView) findViewById(R.id.ivPic);
+        noPic = (TextView) findViewById(R.id.tvNoPic);
         presenter.extractData(getIntent());
 
     }
@@ -58,14 +65,28 @@ public class PlaceDetails extends AppCompatActivity implements PlaceDetailsContr
             phone.setText("Phone: "+place.getPhone());
         if(place.getPriceLevel() != -1)
             price.setText("Price Level: "+place.getPriceLevel());
-        if(place.getWebsite() != null)
+        if(place.getWebsite() != null) {
             web.loadUrl(place.getWebsite().toString());
+            web.setVisibility(View.VISIBLE);
+        }else
+            web.setVisibility(View.GONE);
         if(place.getRating() != -1){
             rate.setProgress((int) place.getRating());
             rate.setVisibility(View.VISIBLE);
         }
         else
             rate.setVisibility(View.GONE);
+        if (place.getImage() != null || place.getImage() == ""){
+            imageView.setVisibility(View.VISIBLE);
+            Glide.with(this).load(place.getImage()).into(imageView);
+        }else {
+            imageView.setVisibility(View.GONE);
+        }
+        if(place.getWebsite() == null && (place.getImage() == ""|| place.getImage() == null))
+            noPic.setVisibility(View.VISIBLE);
+        else
+            noPic.setVisibility(View.GONE);
+
 
     }
 

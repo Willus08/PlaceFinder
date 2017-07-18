@@ -22,7 +22,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.Status;
@@ -90,9 +89,10 @@ public class PlaceFinder extends FragmentActivity implements OnMapReadyCallback,
         recy = (RecyclerView) findViewById(R.id.rvPlacesList);
         layout = new LinearLayoutManager(this);
         animate = new DefaultItemAnimator();
-        presenter.setUpAdapter(result,0);
+       // presenter.setUpAdapter(result,0);
 
-        Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
+
+       // Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
        //
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -118,6 +118,7 @@ public class PlaceFinder extends FragmentActivity implements OnMapReadyCallback,
         Log.d(TAG, "onMapReady: " + places);
         local = new FusedLocationProviderClient(this);
         getLocation();
+
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragmet);
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -139,6 +140,7 @@ public class PlaceFinder extends FragmentActivity implements OnMapReadyCallback,
         });
 
     }
+
     @SuppressWarnings("MissingPermission")
     private void getLocation() {
         local = LocationServices.getFusedLocationProviderClient(this);
@@ -149,8 +151,11 @@ public class PlaceFinder extends FragmentActivity implements OnMapReadyCallback,
                         current= location;
                         Log.d(TAG, "onSuccess: " + location);
                         LatLng curentPlace = new LatLng(location.getLatitude(),location.getLongitude());
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(curentPlace));
 
+                       // presenter.setUpAdapterJSON("all", "" + location.getLatitude()+","+ location.getLongitude());
+                        presenter.setUpAdapterObserviable("","" + current.getLatitude()+","+ current.getLongitude());
+                        Log.d(TAG, "onSuccess: hi");
+                         mMap.moveCamera(CameraUpdateFactory.newLatLng(curentPlace));
 
                     }
                 });
@@ -288,38 +293,38 @@ public class PlaceFinder extends FragmentActivity implements OnMapReadyCallback,
         switch (view.getId()){
             case R.id.btnFood:
                 Toast.makeText(this, "food"+ Place.TYPE_FOOD, Toast.LENGTH_SHORT).show();
-                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_FOOD);
+                // result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
+                presenter.setUpAdapterObserviable("food"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
             case R.id.btnInn:
-                Toast.makeText(this, "Inn?"+ Place.TYPE_ROOM, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Inn"+ Place.TYPE_ROOM, Toast.LENGTH_SHORT).show();
                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_ROOM);
+                presenter.setUpAdapterObserviable("room"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
             case R.id.btnPark:
                 Toast.makeText(this, "Park"+ Place.TYPE_PARK, Toast.LENGTH_SHORT).show();
                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_PARK);
+                presenter.setUpAdapterObserviable("park"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
             case R.id.btnMuseum:
                 Toast.makeText(this, "Museum"+ Place.TYPE_MUSEUM, Toast.LENGTH_SHORT).show();
                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_MUSEUM);
+                presenter.setUpAdapterObserviable("museum"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
             case R.id.btnLandmark:
                 Toast.makeText(this, "Point of Intrest"+ Place.TYPE_POINT_OF_INTEREST, Toast.LENGTH_SHORT).show();
                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_POINT_OF_INTEREST);
+                presenter.setUpAdapterObserviable("all"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
             case R.id.btnBank:
                 Toast.makeText(this, "Bank"+ Place.TYPE_BANK, Toast.LENGTH_SHORT).show();
                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_BANK);
+                presenter.setUpAdapterObserviable("bank"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
             case R.id.btnTheater:
                 Toast.makeText(this, "Theater"+ Place.TYPE_MOVIE_THEATER, Toast.LENGTH_SHORT).show();
                 result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
-                presenter.setUpAdapter(result,Place.TYPE_MOVIE_THEATER);
+                presenter.setUpAdapterObserviable("movie_theater"," "+ current.getLatitude()+","+ current.getLongitude() );
                 break;
         }
     }

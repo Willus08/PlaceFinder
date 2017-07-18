@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,12 +45,12 @@ List<PlacesPojo> places = new ArrayList<>();
         final PlacesPojo place = places.get(position);
         holder.address.setText(place.getAddress());
         holder.id.setText(place.getName());
-
+        Glide.with(holder.itemView.getContext()).load(place.getIcon()).into(holder.icon);
         TranslateAnimation trans = new TranslateAnimation(10,0,12,0);
         trans.setDuration(500);
         holder.itemView.startAnimation(trans);
 
-        holder.address.setOnClickListener(new View.OnClickListener() {
+        holder.Layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -74,14 +77,15 @@ List<PlacesPojo> places = new ArrayList<>();
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView address;
         TextView id;
-
-        LinearLayout linearLayout;
+        ImageView icon;
+        FrameLayout Layout;
         public ViewHolder(final View itemView) {
             super(itemView);
 
             address = (TextView) itemView.findViewById(R.id.tvAddress);
             id = (TextView) itemView.findViewById(R.id.tvID);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.llContainer);
+            icon =(ImageView) itemView.findViewById(R.id.ivIcon);
+            Layout = (FrameLayout) itemView.findViewById(R.id.llContainer);
         }
     }
 }

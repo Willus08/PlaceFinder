@@ -23,13 +23,28 @@ public class PlacesPojo implements Serializable,Parcelable {
     String Id;
     String phone;
     Uri website;
+    String image;
+    String icon;
 
-    public PlacesPojo(String name, String address, String attributions, LatLng latLng, float rating, int priceLevel, String id, String phone, Uri website) {
+    public PlacesPojo(String name, String address, LatLng latLng, float rating, int priceLevel, String image, String icon) {
         this.name = name;
         this.address = address;
-        this.attributions = attributions;
+
         this.latLng = latLng;
         this.rating = rating;
+        this.priceLevel = priceLevel;
+
+        this.phone = phone;
+
+        this.image = image;
+        this.icon = icon;
+    }
+
+    public PlacesPojo(String name, String address, LatLng latLng, float rating, int priceLevel, String id, String phone, Uri website) {
+        this.name = name;
+        this.address = address;
+        this.latLng = latLng;
+        this.rating =   rating;
         this.priceLevel = priceLevel;
         Id = id;
         this.phone = phone;
@@ -46,6 +61,24 @@ public class PlacesPojo implements Serializable,Parcelable {
         Id = in.readString();
         phone = in.readString();
         website = in.readParcelable(Uri.class.getClassLoader());
+    }
+
+
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public static final Creator<PlacesPojo> CREATOR = new Creator<PlacesPojo>() {

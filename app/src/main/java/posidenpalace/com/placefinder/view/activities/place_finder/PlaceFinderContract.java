@@ -33,5 +33,7 @@ public interface PlaceFinderContract {
 
         void setUpAdapter( PendingResult<PlaceLikelihoodBuffer> result , int type);
         void  addPlace(PlacesPojo placesPojo);
+        void setUpAdapterJSON(String type, String LatLng);
+        void setUpAdapterObserviable(String type, String Latlng);
     }
 }
